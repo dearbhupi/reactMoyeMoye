@@ -3,7 +3,8 @@ import React from 'react'
 function HelloWorld() {
   return (
     <div>
-      <h1>Hello, World! </h1>
+      <h1>Welcome to online learning platform </h1>
+      <h3>We offer the following courses: </h3>
     </div>
   )
 }

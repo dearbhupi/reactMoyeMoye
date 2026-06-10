@@ -1,42 +1,72 @@
 import React, { useState } from 'react';
 
 function RegisterForm() {
-  // 1. Initialize state. Using an empty string '' as the default 
-  // allows the input placeholder to show up cleanly.
   const [age, setAge] = useState('');
+  const [email, setEmail] = useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("Form submitted with age:", age);
+    console.log("Form submitted successfully!", { age, email });
   }
 
-  // 2. Convert the input string to a number for an accurate comparison
+  // Validation Logic
   const isAdult = Number(age) >= 18;
+  const isEduEmail = email.toLowerCase().endsWith('.edu');
+  
+  // The form section unlocks only if BOTH conditions are met
+  const canRegister = isAdult && isEduEmail;
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* 3. Link the input value and onChange handler to your state */}
-      <label htmlFor="age-input">Enter your age: </label>
-      <input 
-        id="age-input"
-        type="number" 
-        placeholder="Age"
-        min="0"
-        max="120"
-        value={age} 
-        onChange={(e) => setAge(e.target.value)} 
-      />
+      {/* Age Input */}
+      <div style={{ marginBottom: '15px' }}>
+        <label htmlFor="age-input">Enter your age: </label>
+        <input 
+          id="age-input"
+          type="number" 
+          placeholder="Age"
+          value={age} 
+          onChange={(e) => setAge(e.target.value)} 
+        />
+        {/* Warning if under 18 */}
+        {age !== '' && !isAdult && (
+          <p style={{ color: 'red', margin: '5px 0 0 0' }}>
+            You must be at least 18 years old to register.
+          </p>
+        )}
+      </div>
 
-      {isAdult ? (
-        <>
-          <div style={{ marginTop: '10px' }}>
-            <input type="text" placeholder="Name" required />
+      {/* Email Input */}
+      <div style={{ marginBottom: '15px' }}>
+        <label htmlFor="email-input">Email address: </label>
+        <input 
+          id="email-input"
+          type="email" 
+          placeholder="yourname@university.edu"
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)} 
+        />
+        {/* Warning if email doesn't end in .edu */}
+        {email !== '' && !isEduEmail && (
+          <p style={{ color: 'orange', margin: '5px 0 0 0' }}>
+            Registration requires a valid .edu student email address.
+          </p>
+        )}
+      </div>
+
+      {/* Extra Fields & Submit Button: Only reveals when requirements are fulfilled */}
+      {canRegister ? (
+        <div style={{ borderTop: '1px solid #ccc', paddingTop: '15px' }}>
+          <div style={{ marginBottom: '15px' }}>
+            <label htmlFor="name-input">Full Name: </label>
+            <input id="name-input" type="text" placeholder="Name" required />
           </div>
-          <button type="submit" style={{ marginTop: '10px' }}>Register</button>
-        </>
+          <button type="submit">Register</button>
+        </div>
       ) : (
-        // Only show this warning if they have actually typed an age
-        age !== '' && <p style={{ color: 'red' }}>You must be at least 18 years old to register.</p>
+        <p style={{ color: '#666', fontStyle: 'italic' }}>
+          Please fix the requirements above to proceed with registration.
+        </p>
       )}
     </form>
   );
