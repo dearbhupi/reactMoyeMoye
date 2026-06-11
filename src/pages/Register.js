@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import './Register.css';
 
 function Register() {
@@ -12,11 +12,14 @@ function Register() {
     console.log("Form submitted successfully!", { email, password, age });
   }
 
-  setAge(25); // This will cause an error because setAge is not defined 
+  useEffect(() => {
+    setAge(18);
+    console.log("Component mounted");
+  }, []);
 
   return (
     <form >
-      <h1>age</h1>
+      <h1>{age}</h1>
       <div>
         <label htmlFor="email">Email:</label>
         <input className="input-field"
