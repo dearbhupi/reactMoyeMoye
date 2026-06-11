@@ -4,14 +4,16 @@ import HelloWorld from './pages/HelloWorld';
 import CourseTitlePage from './pages/CourseTitlePage';
 import RegisterForm from './pages/RegisterForm';
 import UserData from './utils/UserData';
+import Register from './pages/Register';
 
 function App() {
   return (
     <div className="App">
       <HelloWorld />
-      <CourseTitlePage/>
+      {/* <CourseTitlePage/>
       <RegisterForm/>
-      <UserData/>
+      <UserData/> */}
+      <Register/>
     </div>
   );
 }
