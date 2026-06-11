@@ -3,6 +3,7 @@ import './App.css';
 import HelloWorld from './pages/HelloWorld';
 import CourseTitlePage from './pages/CourseTitlePage';
 import RegisterForm from './pages/RegisterForm';
+import UserData from './utils/UserData';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <HelloWorld />
       <CourseTitlePage/>
       <RegisterForm/>
+      <UserData/>
     </div>
   );
 }
